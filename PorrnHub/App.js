@@ -7,8 +7,8 @@
  */
 import 'react-native-gesture-handler';
 
-import React from 'react';
-import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import React, { Component } from 'react';
+
 
 // import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -23,27 +23,22 @@ const Tab = createMaterialBottomTabNavigator();
 
 
 import {
-    SafeAreaView,
     StyleSheet,
-    ScrollView,
     View,
-    Text,
-    StatusBar,
 } from 'react-native';
 
 import {
-    Header,
-    LearnMoreLinks,
     Colors,
-    DebugInstructions,
-    ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { Styles } from "./src/assets/css";
 
 import Login from "./screens/Login"
 import Home from "./screens/Home"
+import Animation from "./screens/Animation"
 
-
+// icons
+import IconAntDesign from 'react-native-vector-icons/AntDesign';
+import IconMaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 function HomeScreen() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -92,19 +87,36 @@ function MyTabs() {
                     ),
                 }}
             />
+            <Tab.Screen style={styles.nameNavigator} name="Animation" component={Animation}
+                options={{
+                    tabBarLabel: 'Animation',
+                    tabBarIcon: ({ color }) => (
+                        <IconMaterialCommunityIcons name="animation-play" color={color} size={18} />
+                    ),
+                }}
+            />
         </Tab.Navigator>
     );
 }
 
 // const Tab = createBottomTabNavigator();
-
-export default function App() {
-    return (
-        <NavigationContainer>
-            <MyTabs />
-        </NavigationContainer>
-    );
-};
+console.disableYellowBox = true
+class App extends Component {
+    constructor(props) {
+        super(props)
+        console.disableYellowBox = true
+    }
+    // componentWillMount = async () => {
+    // 	await AsyncStorage.clear()
+    // }
+    render() {
+        return (
+            <NavigationContainer>
+                <MyTabs />
+            </NavigationContainer>
+        );
+    }
+}
 
 const styles = StyleSheet.create({
     // nameNavigator: {
@@ -175,5 +187,5 @@ const styles = StyleSheet.create({
 //   );
 // }
 
-
+export default App;
 
